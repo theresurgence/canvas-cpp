@@ -9,8 +9,14 @@ class File
 public:
     File(std::string id, std::string path, std::string size, std::string url);
     bool exists();
-    bool same_size();
+    bool sameSize();
     void download();
+    std::filesystem::path absPath();
+
+    int id() const;
+    const std::filesystem::path &path() const;
+    unsigned long size() const;
+    const std::string &url() const;
 
 private:
     int m_id;

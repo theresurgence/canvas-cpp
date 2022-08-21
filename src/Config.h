@@ -7,18 +7,18 @@
 class Config
 {
 public:
-    Config();
+    Config() = delete;
 
-    void readConfigFile();
+    static void readConfigFile();
 
-    const std::string &baseUrl() const;
-    const std::filesystem::path &downloadDir() const;
-    const std::string &authToken() const;
+    static const std::string &baseUrl();
+    static const std::filesystem::path &downloadDir();
+    static const std::string &authToken();
 
 private:
-    std::string m_baseUrl;
-    std::filesystem::path m_downloadDir;
-    std::string m_authToken;
+    static std::string m_baseUrl;
+    static std::filesystem::path m_downloadDir;
+    static std::string m_authToken;
 };
 
 #endif // CONFIG_H

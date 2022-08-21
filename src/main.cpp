@@ -1,7 +1,13 @@
 #include "Config.h"
+#include "Courses.h"
+
+//https://canvas.instructure.com/doc/api/files.html
 
 int main()
 {
-    auto Configure{Config()};
-    Configure.readConfigFile();
+    Config::readConfigFile();
+    auto courses = Courses("student");
+
+    courses.refresh();
+    courses.download();
 }

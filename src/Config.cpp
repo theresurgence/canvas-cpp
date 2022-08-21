@@ -4,7 +4,9 @@
 #include <fstream>
 #include <string>
 
-Config::Config() {}
+std::string Config::m_baseUrl{};
+std::filesystem::path Config::m_downloadDir{};
+std::string Config::m_authToken{};
 
 /**
  * TODO input validation
@@ -17,6 +19,7 @@ Config::Config() {}
  * 
  * cross platform filesystem?
  */
+
 void Config::readConfigFile()
 {
     std::ifstream configFile("/home/user/canvas-config.txt");
@@ -36,22 +39,22 @@ void Config::readConfigFile()
 
         } else if (str.compare("[Token]")) {
             std::getline(configFile, str);
-            m_baseUrl = str;
+            m_authToken = str;
         }
     }
 }
 
-const std::string &Config::baseUrl() const
+const std::string &Config::baseUrl()
 {
     return m_baseUrl;
 }
 
-const std::filesystem::path &Config::downloadDir() const
+const std::filesystem::path &Config::downloadDir()
 {
     return m_downloadDir;
 }
 
-const std::string &Config::authToken() const
+const std::string &Config::authToken()
 {
     return m_authToken;
 }
