@@ -2,17 +2,19 @@
 #include "File.h"
 #include "Web.h"
 
-Course::Course(std::string id, std::string name, std::string code, std::string role)
-    : m_id{std::stoi(id)}, m_name{name}, m_code{std::stoi(code)}, m_role{role}
+Course::Course(std::string id, std::string name, std::string code)
+    : m_id{std::stoi(id)}, m_name{name}, m_code{code}
 {}
 
 void Course::download() const
 {
+    createDirs();
     for (const auto &folder : m_folders) {
         folder.download();
     }
 }
 
+//TODO private this???
 void Course::createDirs() const
 {
     for (const auto &folder : m_folders) {
@@ -26,10 +28,10 @@ void Course::refresh()
     m_folders.reserve(foldersJson.size());
 
     for (const auto &folder : foldersJson) {
-        m_folders.emplace_back(folder["id"], folder["path"]);
+        m_folders.emplace_back(folder["id"], folder["full_name"]);
     }
 
-    for (auto folder : m_folders) {
+    for (auto &folder : m_folders) {
         folder.refresh();
     }
 }
@@ -44,17 +46,13 @@ const std::string &Course::name() const
     return m_name;
 }
 
-int Course::code() const
-{
-    return m_code;
-}
-
-const std::string &Course::role() const
-{
-    return m_role;
-}
 
 const std::vector<Folder> &Course::folders() const
 {
     return m_folders;
+}
+
+const std::string &Course::code() const
+{
+    return m_code;
 }
