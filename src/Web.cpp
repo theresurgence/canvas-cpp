@@ -1,5 +1,6 @@
 #include "Web.h"
 #include "File.h"
+#include <fmt/core.h>
 
 json Web::getJson(const std::string &api_endpoint)
 {
@@ -17,10 +18,15 @@ json Web::getJson(const std::string &api_endpoint)
 void Web::downloadFile(const File &file)
 {
     const auto file_abs_path = Config::downloadDir() / file.path();
+    fmt::print("{}\n", file_abs_path.generic_string());
 
     if (!std::filesystem::exists(file_abs_path)) {
         std::ofstream of(file_abs_path, std::ios::binary);
         cpr::Response r = cpr::Download(of, cpr::Url{file.url()});
+
+        fmt::print("Downloading.... {}\n", file_abs_path.generic_string());
+    } else {
+        fmt::print("Skipped {}\n", file_abs_path.generic_string());
     }
 }
 
