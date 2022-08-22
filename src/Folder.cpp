@@ -29,7 +29,7 @@ void Folder::refresh()
     m_files.reserve(filesJson.size());
 
     for (const auto &file : filesJson) {
-        m_files.emplace_back(file["id"], file["filename"], file["size"], file["url"]);
+        m_files.emplace_back(file["id"], file["filename"], file["size"].dump(), file["url"]);
     }
 }
 
