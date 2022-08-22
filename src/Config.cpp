@@ -29,15 +29,15 @@ void Config::readConfigFile()
         if (str.empty()) {
             continue;
 
-        } else if (str.compare("[Canvas Url]")) {
+        } else if (str.compare("[Canvas Url]") == 0) {
             std::getline(configFile, str);
             m_baseUrl = str;
 
-        } else if (str.compare("[Download Folder]")) {
+        } else if (str.compare("[Download Folder]") == 0) {
             std::getline(configFile, str);
             m_downloadDir = std::filesystem::path(str);
 
-        } else if (str.compare("[Token]")) {
+        } else if (str.compare("[Token]") == 0) {
             std::getline(configFile, str);
             m_authToken = str;
         }
