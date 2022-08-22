@@ -15,13 +15,14 @@ void Courses::download() const
 void Courses::refresh()
 {
     const auto coursesJson = Web::getJson(Web::epCourses("student"));
+
     m_courses.reserve(coursesJson.size());
 
     for (const auto &course : coursesJson) {
-        m_courses.emplace_back(course["id"], course["name"], course["code"], course["role"]);
+        m_courses.emplace_back(course["id"], course["name"], course["course_code"]);
     }
 
-    for (auto course : m_courses) {
+    for (auto &course : m_courses) {
         course.refresh();
     }
 }
