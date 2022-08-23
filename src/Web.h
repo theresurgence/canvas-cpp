@@ -15,6 +15,7 @@ class Web
 {
 public:
     Web() = delete; //TODO check if correct
+    static cpr::Response getRequest(const std::string &url);
     static json getJson(const std::string &api_endpoint);
     static void downloadFile(const File &file);
 
@@ -24,8 +25,9 @@ public:
     static std::string epFilesInFolder(int folderId);
 
 private:
-    static std::string EP_COURSES;
-    static std::string EP_PERSONAL_FOLDERS;
+    // static inline std::string EP_COURSES;
+    // static inline std::string EP_PERSONAL_FOLDERS;
+    static inline std::string URL_API_VERSION{"api/v1/"};
 };
 
 #endif // WEB_H

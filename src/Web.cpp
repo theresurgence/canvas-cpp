@@ -2,16 +2,19 @@
 #include "File.h"
 #include <fmt/core.h>
 
+cpr::Response Web::getRequest(const std::string &url)
+{
+    return cpr::Get(cpr::Url{url},
+                    cpr::HttpVersion{cpr::HttpVersionCode::VERSION_2_0},
+                    cpr::Header{{"Accept", "application/json+canvas-string-ids"},
+                                {"Authorization", fmt::format("Bearer {}", Config::authToken())}});
+}
+
 json Web::getJson(const std::string &api_endpoint)
 {
-    auto url = Config::baseUrl() + api_endpoint;
-
-    cpr::Response r = cpr::Get(cpr::Url{url},
-                               cpr::HttpVersion{cpr::HttpVersionCode::VERSION_2_0},
-                               cpr::Header{{"Accept", "application/json+canvas-string-ids"},
-                                           {"Authorization",
-                                            fmt::format("Bearer {}", Config::authToken())}});
-    return json::parse(r.text);
+    const auto url = Config::baseUrl() + URL_API_VERSION + api_endpoint;
+    const auto response = getRequest(url);
+    return json::parse(response.text);
 }
 
 //TODO how to deal with partially downloaded files/ modified files
