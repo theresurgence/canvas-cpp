@@ -21,7 +21,6 @@ json Web::getJson(const std::string &api_endpoint)
 void Web::downloadFile(const File &file)
 {
     const auto file_abs_path = Config::downloadDir() / file.path();
-    fmt::print("{}\n", file_abs_path.generic_string());
 
     if (!std::filesystem::exists(file_abs_path)) {
         std::ofstream of(file_abs_path, std::ios::binary);

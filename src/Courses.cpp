@@ -3,6 +3,7 @@
 #include "Web.h"
 #include <string>
 
+//TODO implement various roles
 Courses::Courses(std::string role) : m_role{role} {}
 
 void Courses::download() const
