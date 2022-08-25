@@ -7,7 +7,11 @@
 class File
 {
 public:
-    File(std::string id, std::string path, std::string size, std::string url);
+    File(std::string id,
+         std::string filePath,
+         std::string size,
+         std::string url,
+         std::filesystem::path folderPath);
     bool exists();
     bool sameSize();
     void download();

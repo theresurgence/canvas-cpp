@@ -28,7 +28,7 @@ void Course::refresh()
     m_folders.reserve(foldersJson.size());
 
     for (const auto &folder : foldersJson) {
-        m_folders.emplace_back(folder["id"], folder["full_name"]);
+        m_folders.emplace_back(folder["id"], folder["full_name"], m_code);
     }
 
     for (auto &folder : m_folders) {

@@ -2,8 +2,8 @@
 #include "Config.h"
 #include "Web.h"
 
-Folder::Folder(std::string id, std::string path)
-    : m_id{std::stoi(id)}, m_path{std::filesystem::path(path)}
+Folder::Folder(std::string id, std::string path, std::string courseCode)
+    : m_id{std::stoi(id)}, m_path{std::filesystem::path(courseCode) / std::filesystem::path(path)}
 {}
 
 bool Folder::exists() const
@@ -29,7 +29,7 @@ void Folder::refresh()
     m_files.reserve(filesJson.size());
 
     for (const auto &file : filesJson) {
-        m_files.emplace_back(file["id"], file["filename"], file["size"].dump(), file["url"]);
+        m_files.emplace_back(file["id"], file["filename"], file["size"].dump(), file["url"], m_path);
     }
 }
 

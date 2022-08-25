@@ -9,7 +9,7 @@
 class Folder
 {
 public:
-    Folder(std::string id, std::string path);
+    Folder(std::string id, std::string path, std::string courseCode);
     bool exists() const;
     void download() const;
     void createDir() const;

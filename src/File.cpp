@@ -2,8 +2,13 @@
 #include "Config.h"
 #include "Web.h"
 
-File::File(std::string id, std::string path, std::string size, std::string url)
-    : m_id{std::stoi(id)}, m_path{std::filesystem::path(path)}, m_size{std::stoul(size)}, m_url{url}
+File::File(std::string id,
+           std::string filePath,
+           std::string size,
+           std::string url,
+           std::filesystem::path folderPath)
+    : m_id{std::stoi(id)}, m_path{folderPath / std::filesystem::path(filePath)},
+      m_size{std::stoul(size)}, m_url{url}
 {}
 
 bool File::exists()
