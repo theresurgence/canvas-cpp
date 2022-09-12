@@ -22,7 +22,10 @@ std::string Config::m_authToken{};
 
 void Config::readConfigFile()
 {
-    std::ifstream configFile("/home/user/canvas-config.txt");
+    auto homePath = std::filesystem::path(getenv("HOME"));
+    auto configFileName = std::filesystem::path("canvas-config.txt");
+    auto configFileAbsPath = homePath / configFileName;
+    std::ifstream configFile(configFileAbsPath);
 
     std::string str;
     while (std::getline(configFile, str)) {
