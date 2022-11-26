@@ -20,11 +20,20 @@ https://canvas.yourinstitution.com
 /home/user/Downloads
 ```
 
+
+## Installing Dependencies (Tested with Debian/Ubuntu)
+If using other distributions, it might be libssl-devel
+
+```shell
+sudo apt install gcc g++ make cmake libssl-dev 
+```
+
 ## Building from source and running the program
 ```
 git clone https://github.com/theresurgence/canvas-cpp
 cd canvas-cpp
 mkdir build && cd build
+
 cmake ..
 make
 sudo make install
