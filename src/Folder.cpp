@@ -28,7 +28,12 @@ void Folder::refresh()
     const auto filesJson = Web::getJson(Web::epFilesInFolder(m_id));
     m_files.reserve(filesJson.size());
 
+
     for (const auto &file : filesJson) {
+        // Skip folder if empty
+        if (file.size() <= 1) {
+            continue;
+        }
         m_files.emplace_back(file["id"], file["filename"], file["size"].dump(), file["url"], m_path);
     }
 }
